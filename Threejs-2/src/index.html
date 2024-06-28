@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-js-2</title>
+</head>
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+   </style>
+<body>
+   <script id="vertexShader" type="vertex">
+    uniform float u_time;
+    void main() {
+        float newX = sin(position.x * u_time) * sin(position.y * u_time);
+        vec3 newPosition = vec3(newX, position.y, position.z);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+   </script>
+
+   <script id="fragmentShader" type="fragment">
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform sampler2D image;
+    void main(){
+        vec2 st = gl_FragCoord.xy / u_resolution;
+        vec4 texture = texture2D(image, st); 
+        gl_FragColor = vec4(0.0, texture.g, 0.0, 1.0); 
+    }
+   </script>
+
+<script src="./js/script.js" type="module"></script>
+</body>
+</html>
+
+<!-- we can also animate the shape by changing the coordinates of the vertices over time but the problem is unlike jvasript we do not have something like date class to get the current time -->
+<!-- so we are gpimg to pass the time from javascript to vertex shader using a uniform variable which is one of the fored storage qualifier-->
+
+
+<!-- Gl frag color represents RGBA color and is used to change the color -->
+<!-- We can also make olor animation same as we have done in vertex shader using time -->
+<!-- We can also do one thing that to make the color darker on right side of screen and lighter on left side of screen but the problem is in GLSL we do not have the way to get the resolutuion of the screen -->
+<!-- But the solution is to provide the information from javascript to GLSL using uniform variable -->
+
+<!-- We use vec4 texture = texture2D(); as the iamge is given in sampler2D format and we need to convert it first into vec4 texture -->
+<!-- BY doing this we can actually change the color of the image -->

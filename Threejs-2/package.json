@@ -1,0 +1,17 @@
+{
+  "name": "threejs-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bundler": "^0.8.0",
+    "parcel": "^2.12.0",
+    "three": "^0.163.0"
+  },
+  "description": ""
+}
